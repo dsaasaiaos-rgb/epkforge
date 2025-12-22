@@ -11,6 +11,7 @@ import {
 import { motion } from 'framer-motion';
 import TagBadge from '@/components/ui/TagBadge';
 import SocialLinksRow from '@/components/ui/SocialLinksRow';
+import ClaimModal from '@/components/profile/ClaimModal';
 
 export default function ArtistProfile() {
   const [artist, setArtist] = useState(null);
@@ -18,6 +19,7 @@ export default function ArtistProfile() {
   const [showFullBio, setShowFullBio] = useState(false);
   const [copied, setCopied] = useState(false);
   const [user, setUser] = useState(null);
+  const [showClaimModal, setShowClaimModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -167,7 +169,7 @@ export default function ArtistProfile() {
                     <Button
                       size="sm"
                       className="bg-emerald-600 hover:bg-emerald-500"
-                      onClick={() => navigate(createPageUrl('Dashboard') + `?claim=${artist.id}`)}
+                      onClick={() => setShowClaimModal(true)}
                     >
                       <Shield className="w-4 h-4 mr-2" />
                       Claim Profile
@@ -399,6 +401,14 @@ export default function ArtistProfile() {
           </div>
         </div>
       </div>
+
+      {/* Claim Modal */}
+      <ClaimModal
+        isOpen={showClaimModal}
+        onClose={() => setShowClaimModal(false)}
+        artist={artist}
+        user={user}
+      />
     </div>
   );
 }
