@@ -108,12 +108,14 @@ export default function Build() {
   };
 
   const generateSlug = (name) => {
-    return name
+    const baseSlug = name
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .trim();
+    // Add timestamp suffix to ensure uniqueness
+    return `${baseSlug}-${Date.now().toString(36)}`;
   };
 
   const handleGenerate = async () => {
