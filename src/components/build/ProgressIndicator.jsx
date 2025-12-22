@@ -1,6 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-import { cn } from "@/lib/utils";
+
+const cx = (...arr) => arr.filter(Boolean).join(" ");
 
 const steps = [
   { num: 1, label: 'Info' },
@@ -15,7 +16,7 @@ export default function ProgressIndicator({ currentStep }) {
       {steps.map((step, index) => (
         <React.Fragment key={step.num}>
           <div className="flex items-center">
-            <div className={cn(
+            <div className={cx(
               "w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all",
               currentStep > step.num ? "bg-emerald-600 text-white" : 
               currentStep === step.num ? "bg-emerald-600 text-white" :
@@ -23,7 +24,7 @@ export default function ProgressIndicator({ currentStep }) {
             )}>
               {currentStep > step.num ? <Check className="w-5 h-5" /> : step.num}
             </div>
-            <span className={cn(
+            <span className={cx(
               "ml-2 text-sm font-medium",
               currentStep >= step.num ? "text-white" : "text-zinc-500"
             )}>
@@ -31,7 +32,7 @@ export default function ProgressIndicator({ currentStep }) {
             </span>
           </div>
           {index < steps.length - 1 && (
-            <div className={cn(
+            <div className={cx(
               "w-12 h-0.5 mx-4",
               currentStep > step.num ? "bg-emerald-600" : "bg-zinc-800"
             )} />
