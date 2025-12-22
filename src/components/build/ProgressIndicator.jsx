@@ -1,44 +1,25 @@
-import React from 'react';
-import { Check } from 'lucide-react';
+"use client";
 
-const cx = (...arr) => arr.filter(Boolean).join(" ");
+export default function ProgressIndicator({ step = 1 }) {
+  const steps = ["Details", "Links", "Generate"];
 
-const steps = [
-  { num: 1, label: 'Info' },
-  { num: 2, label: 'Details' },
-  { num: 3, label: 'Media' },
-  { num: 4, label: 'Generate' }
-];
-
-export default function ProgressIndicator({ currentStep }) {
   return (
-    <div className="flex items-center justify-center mb-8">
-      {steps.map((step, index) => (
-        <React.Fragment key={step.num}>
-          <div className="flex items-center">
-            <div className={cx(
-              "w-10 h-10 rounded-full flex items-center justify-center font-medium transition-all",
-              currentStep > step.num ? "bg-emerald-600 text-white" : 
-              currentStep === step.num ? "bg-emerald-600 text-white" :
-              "bg-zinc-800 text-zinc-500"
-            )}>
-              {currentStep > step.num ? <Check className="w-5 h-5" /> : step.num}
-            </div>
-            <span className={cx(
-              "ml-2 text-sm font-medium",
-              currentStep >= step.num ? "text-white" : "text-zinc-500"
-            )}>
-              {step.label}
-            </span>
+    <div className="flex items-center gap-2 mb-6">
+      {steps.map((label, i) => {
+        const active = i + 1 <= step;
+        return (
+          <div key={label} className="flex items-center gap-2">
+            <div
+              className={`h-2 w-8 rounded-full ${
+                active ? "bg-white" : "bg-white/20"
+              }`}
+            />
+            {i < steps.length - 1 && (
+              <div className="h-[1px] w-4 bg-white/20" />
+            )}
           </div>
-          {index < steps.length - 1 && (
-            <div className={cx(
-              "w-12 h-0.5 mx-4",
-              currentStep > step.num ? "bg-emerald-600" : "bg-zinc-800"
-            )} />
-          )}
-        </React.Fragment>
-      ))}
+        );
+      })}
     </div>
   );
 }
