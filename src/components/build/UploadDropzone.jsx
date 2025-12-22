@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Label } from "@/components/ui/label";
 import { base44 } from '@/api/base44Client';
 import { Upload, X, Loader2 } from 'lucide-react';
-import { cn } from "@/lib/utils";
+
+const cx = (...arr) => arr.filter(Boolean).join(" ");
 
 export default function UploadDropzone({ 
   label, 
@@ -54,7 +55,7 @@ export default function UploadDropzone({
       {description && <p className="text-sm text-zinc-500">{description}</p>}
       
       {displayValue.length > 0 && (
-        <div className={cn(
+        <div className={cx(
           "grid gap-4",
           multiple ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-1"
         )}>
@@ -63,7 +64,7 @@ export default function UploadDropzone({
               <img 
                 src={url} 
                 alt={`Upload ${idx + 1}`}
-                className={cn(
+                className={cx(
                   "w-full rounded-xl object-cover",
                   aspectRatio === 'square' && "aspect-square",
                   aspectRatio === 'video' && "aspect-video",
@@ -83,7 +84,7 @@ export default function UploadDropzone({
       )}
 
       {(!multiple || displayValue.length < maxFiles) && (
-        <label className={cn(
+        <label className={cx(
           "flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors",
           uploading ? "border-zinc-700 bg-zinc-900/50" : "border-zinc-700 hover:border-emerald-500/50 hover:bg-zinc-900/50"
         )}>

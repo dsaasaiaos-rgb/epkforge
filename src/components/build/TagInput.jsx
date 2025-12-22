@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { X } from 'lucide-react';
-import { cn } from "@/lib/utils";
 
 export default function TagInput({ label, placeholder, value = [], onChange, maxTags = 10, suggestions = [] }) {
   const [inputValue, setInputValue] = useState('');
