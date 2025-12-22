@@ -262,7 +262,7 @@ Generate the following:`;
     <div className="min-h-screen py-12 px-4">
       <div className="max-w-3xl mx-auto">
         {currentStep < 5 && (
-          <ProgressIndicator currentStep={currentStep} />
+          <ProgressIndicator step={currentStep} />
         )}
 
         <AnimatePresence mode="wait">
