@@ -1,3 +1,4 @@
+css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -66,4 +67,14 @@
 *:focus-visible {
   outline: 2px solid hsl(142 76% 36%);
   outline-offset: 2px;
+}
+
+/* Hide scrollbar for TikTok-style feed */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

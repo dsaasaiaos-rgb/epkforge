@@ -6,9 +6,9 @@ import DashboardEdit from './pages/DashboardEdit';
 import DashboardExports from './pages/DashboardExports';
 import Explore from './pages/Explore';
 import Home from './pages/Home';
+import Pricing from './pages/Pricing';
 import PrintExport from './pages/PrintExport';
 import Search from './pages/Search';
-import Pricing from './pages/Pricing';
 import __Layout from './Layout.jsx';
 
 
@@ -21,9 +21,9 @@ export const PAGES = {
     "DashboardExports": DashboardExports,
     "Explore": Explore,
     "Home": Home,
+    "Pricing": Pricing,
     "PrintExport": PrintExport,
     "Search": Search,
-    "Pricing": Pricing,
 }
 
 export const pagesConfig = {

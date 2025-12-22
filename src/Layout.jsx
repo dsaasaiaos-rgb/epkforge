@@ -36,9 +36,49 @@ export default function Layout({ children, currentPageName }) {
   };
 
   const isPrintPage = currentPageName === 'PrintExport';
+  const isTikTokPage = ['Home', 'Explore'].includes(currentPageName);
 
   if (isPrintPage) {
     return <>{children}</>;
+  }
+
+  if (isTikTokPage) {
+    return (
+      <div className="relative">
+        {/* Minimal TikTok-style header */}
+        <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/50 to-transparent">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-bold text-xl tracking-tight text-white">EPKForge</span>
+          </div>
+          {user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-zinc-900 border-zinc-800">
+                <DropdownMenuItem 
+                  onClick={() => navigate(createPageUrl('Dashboard'))}
+                  className="text-zinc-300 cursor-pointer"
+                >
+                  <LayoutDashboard className="w-4 h-4 mr-2" />
+                  Dashboard
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout} className="text-red-400 cursor-pointer">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
+        {children}
+      </div>
+    );
   }
 
   return (
