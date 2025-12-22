@@ -9,10 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, ArrowRight, Sparkles, Loader2, Plus, X, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ProgressIndicator from '@/components/build/ProgressIndicator';
-import LinkInputField from '@/components/build/LinkInputField';
-import TagInput from '@/components/build/TagInput';
-import UploadDropzone from '@/components/build/UploadDropzone';
+import ProgressIndicator from '@/components/build/ProgressIndicator.jsx';
+import LinkInputField from '@/components/build/LinkInputField.jsx';
+import TagInput from '@/components/build/TagInput.jsx';
+import UploadDropzone from '@/components/build/UploadDropzone.jsx';
 
 const genreSuggestions = [
   'Hip-Hop', 'R&B', 'Pop', 'Rock', 'Alternative', 'Electronic', 'EDM', 'House',

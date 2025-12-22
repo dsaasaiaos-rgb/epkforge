@@ -11,9 +11,9 @@ import {
   ArrowLeft, Save, RefreshCw, Loader2, Check, User, X, Plus
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import TagInput from '@/components/build/TagInput';
-import LinkInputField from '@/components/build/LinkInputField';
-import UploadDropzone from '@/components/build/UploadDropzone';
+import TagInput from '@/components/build/TagInput.jsx';
+import LinkInputField from '@/components/build/LinkInputField.jsx';
+import UploadDropzone from '@/components/build/UploadDropzone.jsx';
 import { toast } from 'sonner';
 
 const genreSuggestions = [
