@@ -35,8 +35,6 @@ export default function Layout({ children, currentPageName }) {
     base44.auth.logout();
   };
 
-  const isAuthPage = ['Login', 'Signup'].includes(currentPageName);
-  const isPublicArtistPage = currentPageName === 'ArtistProfile';
   const isPrintPage = currentPageName === 'PrintExport';
 
   if (isPrintPage) {
@@ -212,8 +210,7 @@ export default function Layout({ children, currentPageName }) {
       </main>
 
       {/* Footer */}
-      {!isAuthPage && (
-        <footer className="border-t border-zinc-800/50 bg-zinc-950/50">
+      <footer className="border-t border-zinc-800/50 bg-zinc-950/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="flex items-center gap-2">
@@ -239,7 +236,6 @@ export default function Layout({ children, currentPageName }) {
             </div>
           </div>
         </footer>
-      )}
     </div>
   );
 }
