@@ -6,6 +6,8 @@ import ArtistProfile from './pages/ArtistProfile';
 import Dashboard from './pages/Dashboard';
 import DashboardEdit from './pages/DashboardEdit';
 import DashboardExports from './pages/DashboardExports';
+import PrintExport from './pages/PrintExport';
+import AdminClaims from './pages/AdminClaims';
 import __Layout from './Layout.jsx';
 
 
@@ -18,6 +20,8 @@ export const PAGES = {
     "Dashboard": Dashboard,
     "DashboardEdit": DashboardEdit,
     "DashboardExports": DashboardExports,
+    "PrintExport": PrintExport,
+    "AdminClaims": AdminClaims,
 }
 
 export const pagesConfig = {
