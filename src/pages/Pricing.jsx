@@ -114,7 +114,7 @@ export default function Pricing() {
               <CardHeader className="pb-8">
                 <CardTitle className="text-2xl text-white mb-2">Pro</CardTitle>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-bold text-white">$5</span>
+                  <span className="text-5xl font-bold text-white">$1</span>
                   <span className="text-zinc-400">/month</span>
                 </div>
               </CardHeader>
@@ -146,7 +146,7 @@ export default function Pricing() {
                   onClick={handleUpgrade}
                   className="w-full h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold"
                 >
-                  Upgrade for $5/month
+                  Upgrade for $1/month
                 </Button>
                 <p className="text-xs text-center text-zinc-500">Cancel anytime</p>
               </CardContent>
@@ -194,7 +194,7 @@ export default function Pricing() {
                 <FeatureRow
                   icon={<FileDown className="w-5 h-5" />}
                   label="Export PDF"
-                  free={false}
+                  free={true}
                   pro={true}
                 />
                 <FeatureRow
