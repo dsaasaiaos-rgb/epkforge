@@ -1,104 +1,78 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
-import { X, Plus } from 'lucide-react';
+import { Label } from "@/components/ui/label";
+import { X } from 'lucide-react';
+import { cn } from "@/lib/utils";
 
-export default function TagInput({ 
-  label, 
-  placeholder, 
-  value = [], 
-  onChange, 
-  maxTags = 5,
-  suggestions = []
-}) {
+export default function TagInput({ label, placeholder, value = [], onChange, maxTags = 10, suggestions = [] }) {
   const [inputValue, setInputValue] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
-
-  const addTag = (tag) => {
-    const trimmed = tag.trim();
-    if (trimmed && !value.includes(trimmed) && value.length < maxTags) {
-      onChange([...value, trimmed]);
-    }
-    setInputValue('');
-    setShowSuggestions(false);
-  };
-
-  const removeTag = (index) => {
-    const newTags = [...value];
-    newTags.splice(index, 1);
-    onChange(newTags);
-  };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && inputValue) {
+    if (e.key === 'Enter' && inputValue.trim()) {
       e.preventDefault();
-      addTag(inputValue);
-    } else if (e.key === 'Backspace' && !inputValue && value.length > 0) {
-      removeTag(value.length - 1);
+      if (value.length < maxTags && !value.includes(inputValue.trim())) {
+        onChange([...value, inputValue.trim()]);
+        setInputValue('');
+      }
     }
   };
 
-  const filteredSuggestions = suggestions.filter(
-    s => s.toLowerCase().includes(inputValue.toLowerCase()) && !value.includes(s)
-  );
+  const removeTag = (tagToRemove) => {
+    onChange(value.filter(tag => tag !== tagToRemove));
+  };
+
+  const addSuggestion = (suggestion) => {
+    if (value.length < maxTags && !value.includes(suggestion)) {
+      onChange([...value, suggestion]);
+    }
+  };
 
   return (
     <div className="space-y-2">
-      {label && (
-        <label className="text-sm font-medium text-zinc-300">{label}</label>
-      )}
-      <div className="relative">
-        <div className="flex flex-wrap gap-2 p-3 bg-zinc-900/80 border border-zinc-700 rounded-xl min-h-[52px]">
-          {value.map((tag, index) => (
+      <Label className="text-zinc-300">{label}</Label>
+      <Input
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        className="bg-zinc-900/80 border-zinc-700 rounded-xl"
+      />
+      {value.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {value.map(tag => (
             <span
-              key={index}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm"
+              key={tag}
+              className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-sm"
             >
               {tag}
               <button
                 type="button"
-                onClick={() => removeTag(index)}
+                onClick={() => removeTag(tag)}
                 className="hover:text-emerald-300"
               >
                 <X className="w-3 h-3" />
               </button>
             </span>
           ))}
-          {value.length < maxTags && (
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => {
-                setInputValue(e.target.value);
-                setShowSuggestions(true);
-              }}
-              onKeyDown={handleKeyDown}
-              onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-              placeholder={value.length === 0 ? placeholder : ''}
-              className="flex-1 min-w-[120px] bg-transparent outline-none text-white placeholder:text-zinc-500"
-            />
-          )}
         </div>
-
-        {/* Suggestions Dropdown */}
-        {showSuggestions && filteredSuggestions.length > 0 && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-zinc-800 border border-zinc-700 rounded-xl overflow-hidden z-10 max-h-48 overflow-y-auto">
-            {filteredSuggestions.slice(0, 5).map((suggestion, index) => (
+      )}
+      {suggestions.length > 0 && value.length < maxTags && (
+        <div className="flex flex-wrap gap-2">
+          {suggestions
+            .filter(s => !value.includes(s))
+            .slice(0, 8)
+            .map(suggestion => (
               <button
-                key={index}
+                key={suggestion}
                 type="button"
-                onClick={() => addTag(suggestion)}
-                className="w-full px-4 py-2 text-left text-zinc-300 hover:bg-zinc-700 transition-colors text-sm"
+                onClick={() => addSuggestion(suggestion)}
+                className="px-3 py-1 bg-zinc-800 text-zinc-400 border border-zinc-700 rounded-full text-xs hover:bg-zinc-700 hover:text-white transition-colors"
               >
-                {suggestion}
+                + {suggestion}
               </button>
             ))}
-          </div>
-        )}
-      </div>
-      <p className="text-xs text-zinc-500">
-        {value.length}/{maxTags} tags • Press Enter to add
-      </p>
+        </div>
+      )}
     </div>
   );
 }
