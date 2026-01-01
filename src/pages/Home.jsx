@@ -1,6 +1,12 @@
 import React from "react";
-import TikTokFeed from "@/components/tiktok/TikTokFeed";
 
 export default function Home() {
-  return <TikTokFeed />;
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to Base44</h1>
+        <p className="text-gray-600">Start building your app by editing pages/Home.jsx</p>
+      </div>
+    </div>
+  );
 }
