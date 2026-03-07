@@ -55,27 +55,34 @@ export default function ArtistSpotlightCard({ artist }) {
           </div>
         </CardContent>
 
-        <CardFooter className="p-6 pt-0 gap-3">
-          {artist.youtube_url && (
-            <Button 
-              variant="outline" 
-              className="flex-1 bg-transparent border-red-600 text-red-500 hover:bg-red-600 hover:text-white transition-colors"
-              onClick={() => window.open(artist.youtube_url, '_blank')}
-            >
-              <Youtube className="w-4 h-4 mr-2" />
-              YouTube
+        <CardFooter className="p-6 pt-0 flex-col gap-3">
+          <Link to={createPageUrl('ArtistProfile') + `?id=${artist.id}`} className="w-full">
+            <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
+              View Full Profile
             </Button>
-          )}
-          {artist.instagram_url && (
-            <Button 
-              variant="outline" 
-              className="flex-1 bg-transparent border-pink-600 text-pink-500 hover:bg-pink-600 hover:text-white transition-colors"
-              onClick={() => window.open(artist.instagram_url, '_blank')}
-            >
-              <Instagram className="w-4 h-4 mr-2" />
-              Instagram
-            </Button>
-          )}
+          </Link>
+          <div className="flex gap-3 w-full">
+            {artist.youtube_url && (
+              <Button 
+                variant="outline" 
+                className="flex-1 bg-transparent border-red-600 text-red-500 hover:bg-red-600 hover:text-white transition-colors"
+                onClick={() => window.open(artist.youtube_url, '_blank')}
+              >
+                <Youtube className="w-4 h-4 mr-2" />
+                YouTube
+              </Button>
+            )}
+            {artist.instagram_url && (
+              <Button 
+                variant="outline" 
+                className="flex-1 bg-transparent border-pink-600 text-pink-500 hover:bg-pink-600 hover:text-white transition-colors"
+                onClick={() => window.open(artist.instagram_url, '_blank')}
+              >
+                <Instagram className="w-4 h-4 mr-2" />
+                Instagram
+              </Button>
+            )}
+          </div>
         </CardFooter>
       </Card>
     </motion.div>
