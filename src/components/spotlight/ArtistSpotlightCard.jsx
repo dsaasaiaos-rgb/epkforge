@@ -1,92 +1,91 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Play, Instagram, Youtube, Music2, Users, Video } from "lucide-react";
+import { Youtube, Instagram, Music2, Users, Play, ArrowRight } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-export default function ArtistSpotlightCard({ artist }) {
+export default function ArtistSpotlightCard({ artist, index = 0 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="h-full"
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="card-hover group bg-[#141414] border border-white/5 rounded-2xl overflow-hidden flex flex-col h-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 border-gray-800 bg-gray-900/50 backdrop-blur-sm text-white">
-        <div className="relative h-48 overflow-hidden group">
-          <img 
-            src={artist.image_url} 
-            alt={artist.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80" />
-          <div className="absolute bottom-4 left-4 right-4">
-            <h3 className="text-2xl font-bold text-white mb-1">{artist.name}</h3>
-            <div className="flex items-center gap-2 text-sm text-gray-300">
-              <Users className="w-4 h-4" />
-              <span>{artist.subscribers} Subscribers</span>
-            </div>
+      {/* Thumbnail */}
+      <div className="relative h-52 overflow-hidden">
+        <img
+          src={artist.image_url}
+          alt={artist.name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-black/30 to-transparent" />
+
+        {/* Play overlay */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="w-14 h-14 bg-[#ff4444] rounded-full flex items-center justify-center shadow-lg shadow-[#ff4444]/40">
+            <Play className="w-6 h-6 text-white fill-white ml-1" />
           </div>
         </div>
 
-        <CardContent className="flex-grow p-6 space-y-4">
-          <p className="text-gray-300 text-sm leading-relaxed">
-            {artist.bio}
-          </p>
+        {/* Subscriber badge */}
+        <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1 flex items-center gap-1.5 text-xs text-[#f5f5f5]">
+          <Users className="w-3 h-3 text-[#ff4444]" />
+          {artist.subscribers}
+        </div>
+      </div>
 
-          <div className="bg-gray-800/50 rounded-lg p-4 space-y-3 border border-gray-700">
+      {/* Content */}
+      <div className="flex flex-col flex-grow p-5 gap-4">
+        <div>
+          <h3 className="text-xl font-bold text-white mb-1">{artist.name}</h3>
+          <p className="text-sm text-[#888] leading-relaxed line-clamp-2">{artist.bio}</p>
+        </div>
+
+        {/* Latest release */}
+        {artist.latest_release_title && (
+          <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-2">
             <div className="flex items-center justify-between">
-              <Badge variant="outline" className="text-xs border-indigo-500 text-indigo-400">
-                Latest Release
-              </Badge>
-              <span className="text-xs text-gray-500">{artist.latest_release_date}</span>
+              <span className="text-[10px] uppercase tracking-widest text-[#ff4444] font-semibold">Latest Release</span>
+              <span className="text-[11px] text-[#555]">{artist.latest_release_date}</span>
             </div>
-            
-            <div>
-              <h4 className="font-semibold text-white truncate">{artist.latest_release_title}</h4>
-              <div className="flex items-center gap-2 mt-1 text-xs text-gray-400">
-                <Music2 className="w-3 h-3" />
-                <span>{artist.latest_release_type}</span>
-                <span>•</span>
-                <span>{artist.latest_release_views} views</span>
-              </div>
+            <p className="text-sm font-semibold text-white truncate">{artist.latest_release_title}</p>
+            <div className="flex items-center gap-2 text-xs text-[#666]">
+              <Music2 className="w-3 h-3" />
+              <span>{artist.latest_release_type}</span>
+              <span>·</span>
+              <span>{artist.latest_release_views} views</span>
             </div>
           </div>
-        </CardContent>
+        )}
 
-        <CardFooter className="p-6 pt-0 flex-col gap-3">
-          <Link to={createPageUrl('ArtistProfile') + `?id=${artist.id}`} className="w-full">
-            <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
-              View Full Profile
-            </Button>
+        {/* Actions */}
+        <div className="mt-auto space-y-2">
+          <Link to={createPageUrl('ArtistProfile') + `?id=${artist.id}`} className="block">
+            <button className="w-full flex items-center justify-center gap-2 bg-[#ff4444] hover:bg-[#ff6b35] text-white font-semibold py-2.5 rounded-xl transition-colors text-sm">
+              View Profile <ArrowRight className="w-4 h-4" />
+            </button>
           </Link>
-          <div className="flex gap-3 w-full">
+          <div className="flex gap-2">
             {artist.youtube_url && (
-              <Button 
-                variant="outline" 
-                className="flex-1 bg-transparent border-red-600 text-red-500 hover:bg-red-600 hover:text-white transition-colors"
+              <button
                 onClick={() => window.open(artist.youtube_url, '_blank')}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-white/10 text-[#888] hover:text-white hover:border-white/30 transition-all text-xs font-medium"
               >
-                <Youtube className="w-4 h-4 mr-2" />
-                YouTube
-              </Button>
+                <Youtube className="w-3.5 h-3.5" /> YouTube
+              </button>
             )}
             {artist.instagram_url && (
-              <Button 
-                variant="outline" 
-                className="flex-1 bg-transparent border-pink-600 text-pink-500 hover:bg-pink-600 hover:text-white transition-colors"
+              <button
                 onClick={() => window.open(artist.instagram_url, '_blank')}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-white/10 text-[#888] hover:text-white hover:border-white/30 transition-all text-xs font-medium"
               >
-                <Instagram className="w-4 h-4 mr-2" />
-                Instagram
-              </Button>
+                <Instagram className="w-3.5 h-3.5" /> Instagram
+              </button>
             )}
           </div>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </motion.div>
   );
 }
