@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Play, Instagram, Youtube, Music2, Users, Video } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 
 export default function ArtistSpotlightCard({ artist }) {
   return (
