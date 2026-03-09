@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 export default function SEO({ title, description, image }) {
   useEffect(() => {
     // Update Title
-    const previousTitle = document.title;
     if (title) {
       document.title = `${title} | ITSFAMM`;
     }
@@ -11,8 +10,12 @@ export default function SEO({ title, description, image }) {
     // Update Meta Tags
     const updateMeta = (name, content) => {
       if (!content) return;
-      let element = document.querySelector(`meta[name="${name}"]`) || document.querySelector(`meta[property="${name}"]`);
       
+      // Try to find existing meta tag
+      let element = document.querySelector(`meta[name="${name}"]`) || 
+                   document.querySelector(`meta[property="${name}"]`);
+      
+      // Create if not exists
       if (!element) {
         element = document.createElement('meta');
         if (name.startsWith('og:') || name.startsWith('twitter:')) {
@@ -23,21 +26,31 @@ export default function SEO({ title, description, image }) {
         document.head.appendChild(element);
       }
       
+      // Update content
       element.setAttribute('content', content);
     };
 
-    updateMeta('description', description);
-    updateMeta('og:title', title);
-    updateMeta('og:description', description);
+    if (description) {
+      updateMeta('description', description);
+      updateMeta('og:description', description);
+      updateMeta('twitter:description', description);
+    }
+    
+    if (title) {
+      updateMeta('og:title', title);
+      updateMeta('twitter:title', title);
+    }
+
     if (image) {
       updateMeta('og:image', image);
       updateMeta('twitter:image', image);
+      updateMeta('twitter:card', 'summary_large_image');
     }
 
-    // Cleanup
-    return () => {
-      document.title = previousTitle;
-    };
+    // Set default OG/Twitter type/url if missing
+    updateMeta('og:type', 'website');
+    updateMeta('og:url', window.location.href);
+    
   }, [title, description, image]);
 
   return null;

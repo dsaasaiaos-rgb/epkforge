@@ -47,16 +47,16 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
+import ArtistProfile from './pages/ArtistProfile';
 import Home from './pages/Home';
 import Spotlight from './pages/Spotlight';
-import ArtistProfile from './pages/ArtistProfile';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
+    "ArtistProfile": ArtistProfile,
     "Home": Home,
     "Spotlight": Spotlight,
-    "ArtistProfile": ArtistProfile,
 }
 
 export const pagesConfig = {

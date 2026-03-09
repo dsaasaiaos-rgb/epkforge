@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { ArrowRight, Play, TrendingUp, Video, Music } from "lucide-react";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f5f5f5]">
+      <SEO 
+        title="Home" 
+        description="The premier creative hub for independent hip-hop and rap artists in North Carolina and Florida. Discover rising stars like DubbWitDaPlays, NGT, and Hopout2x."
+      />
       {/* Hero */}
       <div className="relative overflow-hidden min-h-[90vh] flex items-center">
         {/* Background glow */}

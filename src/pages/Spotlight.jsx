@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import ArtistSpotlightCard from "@/components/spotlight/ArtistSpotlightCard";
 import { Loader2, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 
 export default function Spotlight() {
   const { data: artists, isLoading } = useQuery({
@@ -22,6 +23,10 @@ export default function Spotlight() {
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f5f5f5] pb-24">
+      <SEO 
+        title="Rising Artists Spotlight" 
+        description="Meet the next wave of hip-hop talent from NC and FL. Featured artists: DubbWitDaPlays, NGT, and Hopout2x."
+      />
       {/* Hero */}
       <div className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader2, ArrowLeft, Youtube, Instagram, Users, Video, Music2, Calendar, Play } from "lucide-react";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 
 export default function ArtistProfile() {
   const [searchParams] = useSearchParams();
@@ -43,6 +44,11 @@ export default function ArtistProfile() {
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f5f5f5] pb-24">
+      <SEO 
+        title={artist.name} 
+        description={artist.bio}
+        image={artist.image_url}
+      />
       {/* Hero */}
       <div className="relative h-[55vh] w-full overflow-hidden">
         <img
