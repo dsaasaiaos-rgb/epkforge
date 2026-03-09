@@ -50,7 +50,6 @@
 import ArtistProfile from './pages/ArtistProfile';
 import Home from './pages/Home';
 import Spotlight from './pages/Spotlight';
-import Discover from './pages/Discover';
 import __Layout from './Layout.jsx';
 
 
@@ -58,7 +57,6 @@ export const PAGES = {
     "ArtistProfile": ArtistProfile,
     "Home": Home,
     "Spotlight": Spotlight,
-    "Discover": Discover,
 }
 
 export const pagesConfig = {

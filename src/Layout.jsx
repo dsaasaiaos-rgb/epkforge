@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Zap, Menu, X, Play, Compass } from 'lucide-react';
-import { PlayerProvider } from '@/components/player/PlayerContext';
-import MiniPlayer from '@/components/player/MiniPlayer';
+import { Zap, Menu, X, Play } from 'lucide-react';
 
 export default function Layout({ children }) {
-  return (
-    <PlayerProvider>
-      <LayoutContent>{children}</LayoutContent>
-    </PlayerProvider>
-  );
-}
-
-function LayoutContent({ children }) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,7 +11,6 @@ function LayoutContent({ children }) {
 
   const navLinks = [
     { label: 'Home', page: 'Home' },
-    { label: 'Discover', page: 'Discover' },
     { label: 'Spotlight', page: 'Spotlight' },
   ];
 
@@ -119,8 +108,6 @@ function LayoutContent({ children }) {
       </nav>
 
       <main>{children}</main>
-
-      <MiniPlayer />
 
       {/* Footer */}
       <footer className="border-t border-white/5 mt-20 py-10 text-center text-[#555] text-sm">
