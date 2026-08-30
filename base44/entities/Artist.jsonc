@@ -1,0 +1,50 @@
+{
+  "name": "Artist",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Short bio for card"
+    },
+    "full_bio": {
+      "type": "string",
+      "description": "Full Artist Profile text"
+    },
+    "artistic_direction": {
+      "type": "string"
+    },
+    "subscribers": {
+      "type": "string"
+    },
+    "video_count": {
+      "type": "number"
+    },
+    "latest_release_title": {
+      "type": "string"
+    },
+    "latest_release_type": {
+      "type": "string"
+    },
+    "latest_release_views": {
+      "type": "string"
+    },
+    "latest_release_date": {
+      "type": "string"
+    },
+    "youtube_url": {
+      "type": "string"
+    },
+    "instagram_url": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

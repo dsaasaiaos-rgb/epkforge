@@ -1,0 +1,46 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "User's display name"
+    },
+    "plan": {
+      "type": "string",
+      "enum": [
+        "free",
+        "pro"
+      ],
+      "default": "free"
+    },
+    "planStatus": {
+      "type": "string",
+      "enum": [
+        "inactive",
+        "active",
+        "past_due",
+        "canceled"
+      ],
+      "default": "inactive"
+    },
+    "planStartedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "planEndsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Stripe customer ID"
+    }
+  },
+  "required": [
+    "displayName",
+    "planStartedAt",
+    "planEndsAt",
+    "customerId"
+  ]
+}
